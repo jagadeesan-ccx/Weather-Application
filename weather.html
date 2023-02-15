@@ -9,24 +9,96 @@
     <link rel="stylesheet" href="weather.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
-<body>
-    <div class="container-xxl g-0 background-image">
-    <img class="img-fluid " src="https://e3.365dm.com/22/11/2048x1152/skynews-rainfall-weather-umbrella_5954037.jpg">
-    </div>
-    <div class="middle">
-        <div class="row d-flex">
-           <div class="col">Enter the location:</div>
-           <div class="col"><input id="input" type="text"></div>
+<body class="d-flex align-items-center justify-content-center">
+    <div class="display-section">
+        <div class="row mt-5 mx-3 d-flex  justify-content-center">
+           <div class="col-lg-4 col-sm-12 d-flex justify-content-center"><h4 class="location">Enter location:</h4></div>
+           <div class="col-lg-4 col-sm-4 col-4"><input class="w-100" id="input" type="text"></div>
         </div>
-        <div class="row mt-3">
-            <input type="button" onclick="collect()" id="button" value="get">
-        </div>
-        <div class="mt-3">
-            <h1 id="output">g</h1>
-            <p id="temp">d</p>
-            <p id="demo">d</p>
+       <section name="direction_speed_humidity">
+        <div class="row mt-5 mb-4 mx-3 d-flex justify-content-center">
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="col-12 d-flex justify-content-center">Wind Speed</div>
+                <div class="col-12 my-2 d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width:30; height:30;" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+                        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
+                      </svg>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <p id="speed">....</p>
+                </div>
+            </div>
 
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="col-12 d-flex justify-content-center">Wind Direction</div>
+                <div class="col-12 my-2 d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width:30; height:30;" fill="currentColor" class="bi bi-compass" viewBox="0 0 16 16">
+                        <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                        <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
+                      </svg>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <p id="direction">....</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="col-12 d-flex justify-content-center">Humidity</div>
+                <div class="col-12 my-2  d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width:30; height:30;" fill="currentColor" class="bi bi-thermometer-sun" viewBox="0 0 16 16">
+                        <path d="M5 12.5a1.5 1.5 0 1 1-2-1.415V2.5a.5.5 0 0 1 1 0v8.585A1.5 1.5 0 0 1 5 12.5z"/>
+                        <path d="M1 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM3.5 1A1.5 1.5 0 0 0 2 2.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0L5 10.486V2.5A1.5 1.5 0 0 0 3.5 1zm5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm4.243 1.757a.5.5 0 0 1 0 .707l-.707.708a.5.5 0 1 1-.708-.708l.708-.707a.5.5 0 0 1 .707 0zM8 5.5a.5.5 0 0 1 .5-.5 3 3 0 1 1 0 6 .5.5 0 0 1 0-1 2 2 0 0 0 0-4 .5.5 0 0 1-.5-.5zM12.5 8a.5.5 0 0 1 .5-.5h1a.5.5 0 1 1 0 1h-1a.5.5 0 0 1-.5-.5zm-1.172 2.828a.5.5 0 0 1 .708 0l.707.708a.5.5 0 0 1-.707.707l-.708-.707a.5.5 0 0 1 0-.708zM8.5 12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/>
+                      </svg>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <p id="hum">....</p>
+                </div>
+            </div>
+            </div>
+       </section>
+       <section name="location_temp"> 
+        <div class="row mx-3 d-flex justify-content-center">
+            <div class="col-lg-6 col-md-6 col-12 ">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                        <div class="d-flex align-items-center">
+                            <div class="px-2" id="cmdd">
+                                <svg  xmlns="http://www.w3.org/2000/svg" style="width:30; height:30;" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                </svg></div>
+                        </div>
+                            <h3 id="print" class="text-uppercase d-flex justify-content-center"></h3>
+                    </div>
+            <div class="col-12">
+                <h6 id="timezone" class="d-flex justify-content-center"></h6>
+                <h6 id="localtime" class="d-flex justify-content-center"></h6>
+            </div>
+            
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 temperat">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img class="icon1" src="" />
+                        <h1 class="d-flex align-items-center" id="temp"></h1>
+                    </div>
+                    <div class="col-12"></div>
+                </div>
+            </div>
         </div>
+       </section>
     </div>
+
+    <script>
+        var input = document.getElementById("input");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    collect();
+    document.getElementById("cmdd").style.display = "block";
+  }
+});
+        </script>
 </body>
 </html>

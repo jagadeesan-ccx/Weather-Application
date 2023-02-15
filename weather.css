@@ -1,14 +1,50 @@
-.background-image img{
-    opacity: 1;
+body{
+    background-image: url('https://wallpapercave.com/wp/wp3980172.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    
 }
-.middle{
-    position: absolute;
-    top:30%;
-    left:50%;
-    transform: translate(-50%, -50%);
+.display-section{
+    overflow-y: auto;
+    scrollbar-width: 0;
+    height: 80vh;
+    width: 80vw;
+    border-radius: 5px;
+    background: rgba(250, 234, 234, 0.5);
+}
+.display-section::-webkit-scrollbar{ 
+    display: none; }
+.location,
+.search{
+    font-family:'Courier New', Courier, monospace;
 }
 input[type="text"]
 {
     background: transparent;
-    border: 1px solid black;
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid #574d4d;
+}
+#print{
+    letter-spacing: 2px;
+    font-size: 40px;
+}
+#temp{
+    font-size:7vw;
+}
+#cmdd{
+    display: none;
+}
+input {
+    text-align: center
+  }
+@media (max-width: 575.98px) {
+    .temperat{
+        padding: 30px 0 30px 0;
+    }
+    #print, #temp{
+        font-size: 20px;
+    }
 }
