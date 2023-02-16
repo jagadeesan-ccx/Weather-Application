@@ -1,50 +1,91 @@
-body{
-    background-image: url('https://wallpapercave.com/wp/wp3980172.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
+*{
+    color: white;
+}
+.p14{
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
     
 }
-.display-section{
+.middle{
+    background: rgba(49, 47, 47, 0.5); 
+    max-height: 90vh;
     overflow-y: auto;
-    scrollbar-width: 0;
-    height: 80vh;
-    width: 80vw;
-    border-radius: 5px;
-    background: rgba(250, 234, 234, 0.5);
 }
-.display-section::-webkit-scrollbar{ 
+
+.forecast{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+.forecast::-webkit-scrollbar{ 
     display: none; }
-.location,
-.search{
-    font-family:'Courier New', Courier, monospace;
+
+    .middle::-webkit-scrollbar{ 
+        display: none; }
+input[type=text], select {
+    height: 70%;
+  width: 50%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
-input[type="text"]
-{
-    background: transparent;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid #574d4d;
+/* .bord:hover .bord{
+    background-color: black;
+} */
+
+input[type=submit] {
+    height: 70%;
+  width: 20%;
+  background-color: #4CAF50;
+  color: white;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
-#print{
-    letter-spacing: 2px;
-    font-size: 40px;
-}
-#temp{
-    font-size:7vw;
-}
-#cmdd{
+#blob{
     display: none;
 }
+input[type=submit]:hover {
+  background-color: #45a049;
+}
 input {
-    text-align: center
-  }
-@media (max-width: 575.98px) {
-    .temperat{
-        padding: 30px 0 30px 0;
+    text-align: center;
+    color:black;
+}
+#temp{
+    font-size: 7vw;
+}
+#section-2{
+    display: none;
+}
+@media (max-width: 991.98px) {
+      body{
+        height: 100%;
+      }
+      #section-1{
+        display: none;
     }
-    #print, #temp{
-        font-size: 20px;
+    #section-2{
+        display: block;
     }
 }
+@media (max-width: 767.98px) { 
+    .pad{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .pad-1{
+        padding-bottom: 20px;
+    }
+    
+}
+@media (max-width: 575.98px) { 
+    .middle{
+        height: 100vh;
+    }
+ }
