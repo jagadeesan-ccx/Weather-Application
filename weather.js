@@ -1,10 +1,36 @@
 var dem;
+
+
+navigator.geolocation.getCurrentPosition(async (location) => {
+  fetch(
+          "https://api.weatherapi.com/v1/forecast.json?key=55abcd02053e4c45804112932231402&q=" +
+            location.coords.latitude +
+            "," +
+            location.coords.longitude +
+            "&aqi=no&days=6"
+        )
+        .then(respons => respons.json())
+        .then(dat => {
+        dem = dat.location.name; 
+        fn();
+    }
+    )   
+     
+}
+    );
+
+
+
 function collect(){
-    dem = document.getElementById('input');
-    fetch('http://api.weatherapi.com/v1/forecast.json?key=f233947edb16410c8b0122108231302&q='+dem.value+'&days=7&aqi=no&alerts=no')
-    
+    dem = document.getElementById('input').value;
+    fn();
+}
+function fn(){
+    fetch('http://api.weatherapi.com/v1/forecast.json?key=f233947edb16410c8b0122108231302&q='+dem+'&days=7&aqi=no&alerts=no')
     .then(response => response.json())
     .then(data => {
+        document.getElementById('name').innerHTML = data.location.name;
+        document.getElementById('name-1').innerHTML = data.location.name;
         document.getElementById('speed').innerHTML = data.current.wind_kph + "kph";
         document.getElementById('hum').innerHTML = data.current.humidity;
         document.getElementById('temp').innerHTML = data.current.temp_c +"\u00B0"+"C";
@@ -18,9 +44,9 @@ function collect(){
         document.getElementById('uv').innerHTML = data.current.uv;
 
          const d=data.location.localtime;
- const date = new Date(d);
- var hour =date.getHours();
- document.getElementById("myRange").value = hour;
+    const date = new Date(d);
+    var hour =date.getHours();
+    document.getElementById("myRange").value = hour;
      var slider = document.getElementById("myRange");
      var output = document.getElementById("demo");
      output.innerHTML = slider.value+ ":00";
@@ -126,4 +152,34 @@ function collect(){
     }).catch((error) =>{
         alert('enter correct location');
     })
+
+   }
+   const autocomplete = (dem) => {
+    console.log(dem);
+    fetch("https://api.weatherapi.com/v1/search.json?key=f233947edb16410c8b0122108231302&q=" + dem)
+        .then((res) => { return res.json() })
+        .then((data) => {
+            var populate = document.getElementById("populate");
+            if (data) {
+                let options = data.map((location, index) => {
+                    return ` <div style="cursor:pointer;" onclick="optionClicked('${location.name}')" class="d-grid ${data.length - 1 === index ? "" : "border-bottom"} py-1">
+                            <span class="fs-low">
+                                ${location.name}
+                            </span>
+                            <span class="base-text"> ${location.country}</span>
+                        </div>`
+                });
+                if (options.length > 0) {
+                    populate.setAttribute('class', populate.getAttribute('class').replace(' d-none', ""))
+                } else {
+                    populate.setAttribute('class', `${populate.getAttribute('class').replace(' d-none', "")} d-none`)
+                }
+                populate.innerHTML = options.join('\n');
+            }
+        })
+}
+const optionClicked = (location) => {
+    document.getElementById('input').value = location;
+    populate.setAttribute('class', `${populate.getAttribute('class').replace(' d-none', "")} d-none`);
+    collect(location);
 }

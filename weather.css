@@ -8,6 +8,9 @@
     transform: translate(-50%, 0);
     
 }
+.autocomplete{
+  background-color: rgba(107, 107, 103, 0.7);
+}
 .middle{
     background: rgba(49, 47, 47, 0.5); 
     max-height: 96vh;
